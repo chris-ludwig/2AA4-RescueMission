@@ -18,10 +18,11 @@ public class Decision {
 
     //return decision as a JSONObject
     public JSONObject getDecision(){
+        //create json object with action
         JSONObject decision = new JSONObject();
         decision.put(a, action);
 
-        if(direction != null){
+        if(direction != null){//add direction parameter if necessary
             decision.put("parameters", new JSONObject().put("direction", direction.toString()));
         }
 
