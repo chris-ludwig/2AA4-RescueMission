@@ -42,7 +42,7 @@ public class ExampleTest {
                    d.getDecision().getDecision().getString("action") == "fly");
         assertTrue(d.getDecision().getDecision().getString("action") == "fly" &&
                    d.getDecision().getDecision().getString("action") == "heading" &&
-                   d.getDecision().getDecision().getJSONObject("parameters").getString("direction") == "L" &&
+                   d.getDecision().getDecision().getJSONObject("parameters").getString("direction") == "R" &&
                    d.getDecision().getDecision().getString("action") == "heading");
         assertTrue(d.getDecision().getDecision().getString("action") == "echo");
         assertTrue(d.getDecision().getDecision().getString("action") == "scan");
