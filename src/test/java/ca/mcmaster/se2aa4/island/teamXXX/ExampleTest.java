@@ -13,7 +13,7 @@ public class ExampleTest {
         //testing Direction enum
         Direction a = Direction.WEST;
 
-        assertTrue(a.toString() == "W");
+        assertTrue(a.toString().equals("W"));
         assertTrue(a.toVector()[0] == -1 && a.toVector()[1] == 0);
 
         //testing Decision class
@@ -21,9 +21,10 @@ public class ExampleTest {
         Decision c = new Decision("heading", Direction.EAST);
 
         JSONObject tempJSON = b.getDecision();
-        assertTrue(tempJSON.getString("action") == "fly");
+        assertTrue(tempJSON.getString("action").equals("fly"));
         tempJSON = c.getDecision();
-        assertTrue(tempJSON.getString("action") == "heading" && tempJSON.getJSONObject("parameters").getString("direction") == "E");
+        assertTrue(tempJSON.getString("action").equals("heading") && 
+                   tempJSON.getJSONObject("parameters").getString("direction").equals("E"));
 
         //testing Phase
         Phase d = new PhaseFindIsland();
@@ -33,19 +34,19 @@ public class ExampleTest {
         d.wideTurn((Direction.RIGHT));
         d.echo(Direction.LEFT);
         d.scan();
-        assertTrue(d.getDecision().getDecision().getString("action") == "fly");
-        assertTrue(d.getDecision().getDecision().getJSONObject("parameters").getString("direction") == "R");
-        assertTrue(d.getDecision().getDecision().getString("action") == "fly" &&
-                   d.getDecision().getDecision().getJSONObject("parameters").getString("direction") == "R" &&
-                   d.getDecision().getDecision().getString("action") == "heading" &&
-                   d.getDecision().getDecision().getJSONObject("parameters").getString("direction") == "R" &&
-                   d.getDecision().getDecision().getString("action") == "fly");
-        assertTrue(d.getDecision().getDecision().getString("action") == "fly" &&
-                   d.getDecision().getDecision().getString("action") == "heading" &&
-                   d.getDecision().getDecision().getJSONObject("parameters").getString("direction") == "R" &&
-                   d.getDecision().getDecision().getString("action") == "heading");
-        assertTrue(d.getDecision().getDecision().getString("action") == "echo");
-        assertTrue(d.getDecision().getDecision().getString("action") == "scan");
+        assertTrue(d.getDecision().getDecision().getString("action").equals("fly"));
+        assertTrue(d.getDecision().getDecision().getJSONObject("parameters").getString("direction").equals("R"));
+        assertTrue(d.getDecision().getDecision().getString("action").equals("fly") &&
+                   d.getDecision().getDecision().getJSONObject("parameters").getString("direction").equals("R") &&
+                   d.getDecision().getDecision().getString("action").equals("heading") &&
+                   d.getDecision().getDecision().getJSONObject("parameters").getString("direction").equals("R") &&
+                   d.getDecision().getDecision().getString("action").equals("fly"));
+        assertTrue(d.getDecision().getDecision().getString("action").equals("fly") &&
+                   d.getDecision().getDecision().getString("action").equals("heading") &&
+                   d.getDecision().getDecision().getJSONObject("parameters").getString("direction").equals("R") &&
+                   d.getDecision().getDecision().getString("action").equals("heading"));
+        assertTrue(d.getDecision().getDecision().getString("action").equals("echo"));
+        assertTrue(d.getDecision().getDecision().getString("action").equals("scan"));
 
 
         //testing ResultEcho
