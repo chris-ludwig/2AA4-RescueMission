@@ -10,7 +10,7 @@ public class ResultEcho extends Result{
         super(response);
 
         distance = response.getJSONObject("extras").getInt("range");
-        if(response.getJSONObject("extras").getString("found") == "GROUND") landHo = true;
+        if(response.getJSONObject("extras").getString("found").equals("GROUND")) landHo = true;
         else landHo = false;
     }
 
