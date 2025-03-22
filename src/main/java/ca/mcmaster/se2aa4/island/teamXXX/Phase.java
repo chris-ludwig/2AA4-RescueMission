@@ -7,11 +7,14 @@ import java.util.Queue;
 public abstract class Phase {
     protected Queue<Decision> decisions = new LinkedList<>();
     protected State state;
-    protected Result knowledge;
+    protected Result result;
 
-    public Phase(Result knowledge){
-        this.knowledge = knowledge;
-        onEnter();
+    public Phase(){
+        state = State.INITIAL;
+    }
+
+    public void acknowledge(Result result){
+
     }
 
     protected void fly(){
@@ -48,6 +51,9 @@ public abstract class Phase {
     protected void switchPhase(String phase){
         decisions.add(new Decision(phase));
     }
+    public State getState(){
+        return state;
+    }
 
     //get decision off queue
     public Decision getDecision(){
@@ -55,7 +61,4 @@ public abstract class Phase {
         return decisions.remove();
     }
     protected abstract void makeDecision();
-
-    protected abstract void onEnter();
-
 }
