@@ -33,19 +33,19 @@ public class ExampleTest {
         d.wideTurn((Direction.RIGHT));
         d.echo(Direction.LEFT);
         d.scan();
-        assertTrue(d.getDecision() == new Decision("fly"));
-        assertTrue(d.getDecision() == new Decision("heading", Direction.RIGHT));
-        assertTrue(d.getDecision() == new Decision("fly") &&
-                   d.getDecision() == new Decision("heading", Direction.RIGHT) &&
-                   d.getDecision() == new Decision("heading", Direction.RIGHT) &&
-                   d.getDecision() == new Decision("heading", Direction.RIGHT) &&
-                   d.getDecision() == new Decision("fly"));
-        assertTrue(d.getDecision() == new Decision("Fly") &&
-                   d.getDecision() == new Decision("heading", Direction.LEFT) &&
-                   d.getDecision() == new Decision("heading", Direction.LEFT) &&
-                   d.getDecision() == new Decision("heading", Direction.RIGHT));
-        assertTrue(d.getDecision() == new Decision("echo", Direction.LEFT));
-        assertTrue(d.getDecision() == new Decision("scan"));
+        assertTrue(d.getDecision().getDecision().getString("action") == "fly");
+        assertTrue(d.getDecision().getDecision().getJSONObject("parameters").getString("direction") == "R");
+        assertTrue(d.getDecision().getDecision().getString("action") == "fly" &&
+                   d.getDecision().getDecision().getJSONObject("parameters").getString("direction") == "R" &&
+                   d.getDecision().getDecision().getString("action") == "heading" &&
+                   d.getDecision().getDecision().getJSONObject("parameters").getString("direction") == "R" &&
+                   d.getDecision().getDecision().getString("action") == "fly");
+        assertTrue(d.getDecision().getDecision().getString("action") == "fly" &&
+                   d.getDecision().getDecision().getString("action") == "heading" &&
+                   d.getDecision().getDecision().getJSONObject("parameters").getString("direction") == "L" &&
+                   d.getDecision().getDecision().getString("action") == "heading");
+        assertTrue(d.getDecision().getDecision().getString("action") == "echo");
+        assertTrue(d.getDecision().getDecision().getString("action") == "scan");
 
 
         //testing ResultEcho
