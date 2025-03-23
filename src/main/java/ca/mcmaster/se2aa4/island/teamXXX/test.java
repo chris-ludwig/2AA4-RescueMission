@@ -4,12 +4,8 @@ public class test {
     public static void main(String args[]){
         System.out.println("Current Working Directory: " + System.getProperty("user.dir"));
 
-        //testing Direction enum
-        Direction n = Direction.WEST;
-        System.out.println(n.toString());
-        int[] a = n.toVector();
-        System.out.println(a[0] + ", " + a[1]);
-
-
+        Biome biome = Biome.valueOf("OCEAN");
+        System.out.println(biome.toString());
+        if(biome == Biome.OCEAN) System.out.println("yippeeeeee");
     }
 }

@@ -14,7 +14,7 @@ public abstract class Phase {
     }
 
     public void acknowledge(Result result){
-
+        this.result = result;
     }
 
     protected void fly(){
@@ -50,6 +50,9 @@ public abstract class Phase {
     }
     protected void switchPhase(String phase){
         decisions.add(new Decision(phase));
+    }
+    protected void switchPhase(String phase, Direction direction){
+        decisions.add(new Decision(phase, direction));
     }
     public State getState(){
         return state;

@@ -8,6 +8,7 @@ import eu.ace_design.island.bot.IExplorerRaid;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+//add drone initialization, getdecision from drone in takedecision. and drone acknowledgeresults in acknowledgeResults
 public class Explorer implements IExplorerRaid {
 
     private final Logger logger = LogManager.getLogger();

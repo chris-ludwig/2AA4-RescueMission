@@ -28,6 +28,15 @@ enum Direction{
         else return null;
     }
 
+    public static Direction fromVector(int[] vector) {
+        if (vector[0] == 0 && vector[1] == -1) return Direction.NORTH;
+        else if (vector[0] == 1 && vector[1] == 0) return Direction.EAST;
+        else if (vector[0] == 0 && vector[1] == 1) return Direction.SOUTH;
+        else if (vector[0] == -1 && vector[1] == 0) return Direction.WEST;
+        else return null;
+    }
+    
+
     public Direction opposite(){
         if(this == Direction.NORTH) return Direction.SOUTH;
         else if(this == Direction.EAST) return Direction.WEST;
