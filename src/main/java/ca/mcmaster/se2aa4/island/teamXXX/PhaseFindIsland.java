@@ -15,8 +15,9 @@ public class PhaseFindIsland extends Phase {
         switch (state) {
             case State.INITIAL://echo right to start the cycle
                 echo(Direction.RIGHT);
+                switchState(State.FINDLAND);
                 break;
-            case State.FINDLAND:
+            case State.FINDLAND://echoes left and right while moving forward until land is found
                 ResultEcho echoResult = (ResultEcho)result;
 
                 if(echoResult.groundFound()){//ground found, turn and switch states
@@ -43,7 +44,7 @@ public class PhaseFindIsland extends Phase {
                 for(int i=0; i<=distance; i++){
                     fly();
                 }
-                switchPhase("PhaseGridSearch");
+                switchPhase("PhaseGridSearch", step);
                 break;
                 
             default:

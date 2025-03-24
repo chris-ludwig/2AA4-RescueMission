@@ -8,10 +8,10 @@ import eu.ace_design.island.bot.IExplorerRaid;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-//add drone initialization, getdecision from drone in takedecision. and drone acknowledgeresults in acknowledgeResults
 public class Explorer implements IExplorerRaid {
 
     private final Logger logger = LogManager.getLogger();
+    Drone drone;
 
     @Override
     public void initialize(String s) {
@@ -22,17 +22,18 @@ public class Explorer implements IExplorerRaid {
         Integer batteryLevel = info.getInt("budget");
         logger.info("The drone is facing {}", direction);
         logger.info("Battery level is {}", batteryLevel);
+        drone = new Drone(batteryLevel, Direction.fromString(direction)); //initializes drone
     }
 
     @Override
     public String takeDecision() {
         JSONObject decision = new JSONObject();
-        decision.put("action", "stop"); // we stop the exploration immediately
+        decision = drone.giveDecision();//gets decision from drone
         logger.info("** Decision: {}",decision.toString());
         return decision.toString();
     }
 
-    @Override
+    @Override//will call acknowledgeresults from drone
     public void acknowledgeResults(String s) {
         JSONObject response = new JSONObject(new JSONTokener(new StringReader(s)));
         logger.info("** Response received:\n"+response.toString(2));
@@ -42,6 +43,20 @@ public class Explorer implements IExplorerRaid {
         logger.info("The status of the drone is {}", status);
         JSONObject extraInfo = response.getJSONObject("extras");
         logger.info("Additional information received: {}", extraInfo);
+
+        //determining result type
+        Result result;
+        if(extraInfo.has("biomes")){
+            result = new ResultScan(cost, status, extraInfo);
+        }
+        else if(extraInfo.has("range")){
+            result = new ResultEcho(cost, status, extraInfo);
+        }
+        else{
+            result = new Result(cost, status);
+        }
+
+        drone.acknowledgeResults(result);
     }
 
     @Override

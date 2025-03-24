@@ -20,6 +20,17 @@ enum Direction{
         else return "F";
     }
 
+    public static Direction fromString(String string){
+        if(string.equals("N")) return Direction.NORTH;
+        else if(string.equals("E")) return Direction.EAST;
+        else if(string.equals("S")) return Direction.SOUTH;
+        else if(string.equals("W")) return Direction.WEST;
+        else if(string.equals("L")) return Direction.LEFT;
+        else if(string.equals("R")) return Direction.RIGHT;
+        else if(string.equals("F")) return Direction.FORWARD;
+        else return null;
+    }
+
     public int[] toVector(){
         if(this == Direction.NORTH) return new int[]{0, -1};
         else if(this == Direction.EAST) return new int[]{1, 0};

@@ -14,7 +14,7 @@ public enum Biome {
     TAIGA,
     SNOW,
     TUNDRA,
-    APLINE,
+    ALPINE,
     GLACIER,
     SHRUBLAND,
     SUB_TROPICAL_DESERT;

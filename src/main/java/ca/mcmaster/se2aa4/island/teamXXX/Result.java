@@ -1,7 +1,5 @@
 package ca.mcmaster.se2aa4.island.teamXXX;
 
-import org.json.JSONObject;
-
 //holds the results of actions which return a cost and status
 public class Result {
     protected Integer cost;

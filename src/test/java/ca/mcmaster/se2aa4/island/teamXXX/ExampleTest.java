@@ -56,6 +56,18 @@ public class ExampleTest {
         assertTrue(e.groundFound());
         assertTrue(e.getCost() == 1);
         assertTrue(e.getDistance() == 2);
+
+        //testing ResultScan
+        tempJSON = new JSONObject("{ \"biomes\": [\"GLACIER\", \"ALPINE\"], \"creeks\": [], \"sites\": []}");
+        ResultScan f = new ResultScan(1, "OK", tempJSON);
+        assertTrue(f.getBiomes()[0] == Biome.GLACIER && f.getBiomes()[1] == Biome.ALPINE);
+
+        //testing Battery
+        Battery g = new Battery(40);
+        assertTrue(g.getCharge() == 40);
+        g.drain(20);
+        assertTrue(g.getCharge() == 20);
+        assertTrue(g.isLow());
     }
 
 

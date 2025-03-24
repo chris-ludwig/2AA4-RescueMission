@@ -22,13 +22,14 @@ public class Decision {
     //apply the left/right turn to the drones position from the command
     public void applyTurn(Direction direction){
         if(this.direction == null) return;//decision is undirected
+        
         int[] directionVector = direction.toVector();
         if(this.direction == Direction.LEFT  && directionVector[0] == 0 || this.direction == Direction.RIGHT && directionVector[0] != 0){
             int temp = directionVector[0];
             directionVector[0] = directionVector[1];
             directionVector[1] = temp;
         }
-        else if(this.direction == Direction.LEFT && directionVector[0] != 1 || this.direction == Direction.RIGHT && directionVector[0] == 0){
+        else if(this.direction == Direction.LEFT && directionVector[0] != 0 || this.direction == Direction.RIGHT && directionVector[0] == 0){
             int temp = -directionVector[0];
             directionVector[0] = -directionVector[1];
             directionVector[1] = temp;

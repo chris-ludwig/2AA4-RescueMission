@@ -7,12 +7,13 @@ import org.json.JSONObject;
 //provides way for explorer to interact with phases and get drones actions
 public class Drone {
     private Battery battery;
-    private GPS gps;
+    private Direction direction;
     private Phase phase = new PhaseFindIsland();
 
     public Drone(int charge, Direction direction) {
         this.battery = new Battery(charge);
-        this.gps = new GPS(direction);
+        this.direction = direction;
+        phase.acknowledge(new Result(0, "OK"));
     }
 
     public JSONObject giveDecision(){//give next action
@@ -34,11 +35,13 @@ public class Drone {
             decision = phase.getDecision();
         } 
         //apply turn and return decision as JSONObject
-        decision.applyTurn(gps.getDirection());
+        decision.applyTurn(direction);
+        if(decision.getAction().equals("heading")) direction = decision.getDirection(); //if action is a turn, change direction
         return decision.getJSONObject();
     }
 
     public void acknowledgeResults(Result result){//send results to phase to make next decision
+        battery.drain(result.getCost());
         phase.acknowledge(result);
     }
 }

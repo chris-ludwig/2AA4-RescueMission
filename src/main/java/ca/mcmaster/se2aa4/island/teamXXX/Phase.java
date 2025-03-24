@@ -11,13 +11,14 @@ public abstract class Phase {
 
     public Phase(){
         state = State.INITIAL;
+        acknowledge(new Result(0, "OK"));
     }
 
-    public void acknowledge(Result result){
+    public void acknowledge(Result result){//recieve results
         this.result = result;
     }
 
-    protected void fly(){
+    protected void fly(){//fly forward
         decisions.add(new Decision("fly"));
     }
 
@@ -58,9 +59,12 @@ public abstract class Phase {
         return state;
     }
 
-    //get decision off queue
+    //get decision off queue or populate it if empty
     public Decision getDecision(){
-        if(decisions.isEmpty()) makeDecision();
+        if(!result.isOK()){//stops if status is not ok
+            return new Decision("stop");
+        }
+        if(decisions.isEmpty()) makeDecision();//if queue, empty, populate it and then pop
         return decisions.remove();
     }
     protected abstract void makeDecision();
